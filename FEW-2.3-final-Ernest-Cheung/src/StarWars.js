@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 // import axios from 'axios';
+import './App.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { save } from './actions';
 
@@ -40,7 +41,13 @@ function StarWars() {
 			<input
 				type="number"
 				placeholder="What ID character u want?"
-				style={{ width: 300 }}
+				style={{
+					width: 300,
+					height: '2em',
+					borderRadius: 20,
+					border: '1px black solid',
+					paddingLeft: 15,
+				}}
 				value={ids}
 				onChange={(e) => setIds(e.target.value)}
 			></input>
@@ -52,7 +59,14 @@ function StarWars() {
 				Go
 			</button>
 			{data ? (
-				<div>
+				<div
+					style={{
+						display: 'flex',
+						flexDirection: 'column',
+						justifyContent: 'center',
+						alignItems: 'center',
+					}}
+				>
 					<h2>Name: {data.name}</h2>
 					<h3>Height: {data.height}</h3>
 					<h3>Hair Color: {data.hair_color}</h3>
@@ -70,23 +84,36 @@ function StarWars() {
 					</form>
 				</div>
 			) : (
-				"doesn't exist"
+				''
 			)}
 			{saved ? (
 				<div>
 					{saved.map((obj, index) => {
 						console.log(obj);
 						return (
-							<div key={index}>
-								Name: {obj.name}
-								Height: {obj.height}
-								Hair: {obj.hair_color}
-								Eye Color: {obj.eye_color}
+							<div
+								key={index}
+								style={{
+									border: '1px black solid',
+									padding: 20,
+									marginBottom: 50,
+									backgroundColor: 'black',
+									color: 'white',
+								}}
+							>
+								<h1>{obj.name}</h1>
+								<p>Height: {obj.height}</p>
+								<p>Hair: {obj.hair_color}</p>
+								<p>Eye Color: {obj.eye_color}</p>
 								<h2> Homeworld </h2>
 								Homeworld: {obj.homeworld.name}
-								climate: {obj.homeworld.climate}
-								diameter: {obj.homeworld.diameter}
-								gravity: {obj.homeworld.gravity}
+								<p>climate: {obj.homeworld.climate}</p>
+								<p>diameter: {obj.homeworld.diameter}</p>
+								<p>gravity: {obj.homeworld.gravity}</p>
+								<h2> Films </h2>
+								{obj.films.map((films, index) => {
+									return <p key={index}>{films.title}</p>;
+								})}
 							</div>
 						);
 					})}
